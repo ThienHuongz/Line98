@@ -29,7 +29,7 @@ public class Map{
     }
     public void draw (Graphics g){
         g.drawImage(bg, 0, 0, null);
-        System.out.println(listOfBall.size());
+        // System.out.println(listOfBall.size());
         for (int i=0; i< listOfBall.size();i++){
             listOfBall.get(i).draw(g);
         }
