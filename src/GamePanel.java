@@ -9,10 +9,12 @@ public class GamePanel extends JPanel implements Runnable {
     private Thread thread;
     private static int FPS = 60;
     private Map map;
-
+    private MouseHandle ms = new MouseHandle(this);
+    
     public GamePanel() {
         super();
         map = new Map();
+        this.addMouseListener(ms);
         this.setFocusable(true);
         thread = new Thread(this);
 
@@ -70,5 +72,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     
     public void mouse_click(int mx, int my) {
+        map.mouse_click(mx,my);
     }
+
+
 }

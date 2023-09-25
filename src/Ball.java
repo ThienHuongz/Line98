@@ -10,7 +10,7 @@ public class Ball {
   private BufferedImage ballBig,ballSmall;
   private Image ball2 ;
   private int x, y, type;
-  private boolean ballClicked;
+  private boolean ballClicked = false;
 
   public Ball(int i, int x, int y, int type) {
     this.x = x;
@@ -20,7 +20,7 @@ public class Ball {
     try {
       ballBig = ImageIO.read(new File("../assets/big" + i + ".png"));      
       ballSmall = ImageIO.read(new File("../assets/small" + i + ".png"));
-      ball2 = new ImageIcon("../assets/d" + i + ".png").getImage();
+      ball2 = new ImageIcon("../assets/d" + i + ".gif").getImage();
     } catch (Exception e) {
       // TODO: handle exception
       e.printStackTrace();
@@ -28,19 +28,37 @@ public class Ball {
   }
 
   public void draw(Graphics g) {
-    // g.drawImage(ballSmall, 15 , 70, null);    
+    // g.drawImage(ball2, 15 , 70, null);    
     // g.drawImage(ballSmall, 60 , 115, null);
 
-    if (type == 1){
-      // System.out.println(x+" "+y);
-      g.drawImage(ballBig, 45 * x, 50 + 45 * y, null);
+    if (ballClicked == true){
+      g.drawImage(ball2, 45 * x, 50 + 45 * y, null);
     }
-    else {
-      g.drawImage(ballSmall, 15+45 * x, 70 + 45 * y, null);
+    else{
+      if (type == 1){
+        // System.out.println(x+" "+y);
+        g.drawImage(ballBig, 45 * x, 50 + 45 * y, null);
+      }
+      else {
+        g.drawImage(ballSmall, 15+45 * x, 70 + 45 * y, null);
+      }
     }
-  }
 
-  public void setBallClicked(boolean ballClicked) {
-    this.ballClicked = ballClicked;
+  }
+  public int getType(){
+    return type;
+  }
+  public void setType(int type){
+    this.type=type;
+  }
+  public void setBallClicked() {
+    this.ballClicked = !ballClicked;
+  }
+  public boolean getBallClicked() {
+    return ballClicked;
+  }
+  public void setXY(int x,int y){
+    this.x=x;
+    this.y=y;
   }
 }
