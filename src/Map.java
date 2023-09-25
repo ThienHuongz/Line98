@@ -15,7 +15,8 @@ public class Map{
     private Random random = new Random();
     private int ballInitNumber = 7;    
     private int EmptyLine = 81; 
- 
+    private Score sc = new Score();
+
     private static Point p = new Point(-1, -1);
     public ArrayList<Point> pathBall = new ArrayList<>();
 
@@ -50,6 +51,7 @@ public class Map{
                 }
             }
         }
+        sc.draw(g);
     }
     public void init(){
         int i, j, remain, count, stop;
