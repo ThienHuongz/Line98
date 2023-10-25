@@ -11,7 +11,7 @@ public class GamePanel extends JPanel implements Runnable {
     private Map map;
     private MouseHandle ms = new MouseHandle(this);
 
-    private Timer timer = new Timer(this);
+    //private Timer timer = new Timer(this);
     
     public GamePanel() {
         super();
