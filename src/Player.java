@@ -1,4 +1,3 @@
-package Lines;
 
 import java.awt.*;
 import javax.swing.*;
