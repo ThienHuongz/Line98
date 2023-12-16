@@ -6,6 +6,13 @@
       "name": "game",
       "request": "launch",
       "mainClass": "game",
+      "projectName": "Line98_eaae62d8"
+    },
+    {
+      "type": "java",
+      "name": "game",
+      "request": "launch",
+      "mainClass": "game",
       "projectName": "Line98_71cceda8"
     },
     {

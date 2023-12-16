@@ -31,7 +31,7 @@ public class Map {
 
     public Map() {
         try {
-            bg = ImageIO.read(new File("../assets/layout.png"));
+            bg = ImageIO.read(new File("../assets/background.png"));
 
         } catch (Exception e) {
             e.printStackTrace();
