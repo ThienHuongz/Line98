@@ -59,6 +59,7 @@ public class Map {
     public void init() {
         int i, j, remain, stop;
         // srand(time(NULL));
+        SoundEffect.playBGM(0);
 
         for (int k = 0; k < ballInitNumber; k++) {
             remain = randomX(EmptyLine--) + 1;
@@ -269,8 +270,8 @@ public class Map {
         if (my > 50) {
             int yy = (my - 50) / 45;
             int xx = mx / 45;
-
-            // System.out.println(yy+" "+xx);
+            SoundEffect.play(2);
+            // System.out.println(yy+" "+xx);   
             if (listOfBall[xx][yy] != null && listOfBall[xx][yy].getType() == 1) {
                 if (p.x != -1) {
                     listOfBall[p.x][p.y].setBallClicked();
@@ -285,6 +286,7 @@ public class Map {
                     smallToBigBall();
                     addSmallBall();
                     if (checkBallScore()) {
+                        SoundEffect.play(1);
                         sc.setCount();
                     }
                 }
