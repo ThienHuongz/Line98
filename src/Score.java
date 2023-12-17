@@ -1,35 +1,44 @@
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.File;
-import javax.imageio.ImageIO;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.Color;
 
 public class Score {
 
-  private BufferedImage img;
-  private BufferedImage sc[] = new BufferedImage[10];
+  Font font;
   private int count = 0;
 
   public Score() {
     try {
-      img = ImageIO.read(new File("../assets/score.png"));
-      for (int i = 0; i < 10; i++) {
 
-        sc[i] = img.getSubimage(0 + 18 * i, 0, 18, 35);
-      }
-    } catch (Exception e) {
+      File fontFile = new File("../assets/digital-7.regular.ttf");
+
+      // Copy the font file to a temporary file
+      Path tempFontFile = Files.createTempFile("digital-7", ".ttf");
+      Files.copy(fontFile.toPath(), tempFontFile, StandardCopyOption.REPLACE_EXISTING);
+
+      // Load the font from the temporary file
+      font = Font.createFont(Font.TRUETYPE_FONT, tempFontFile.toFile()).deriveFont(80f);
+
+    } catch (IOException | FontFormatException e) {
       e.printStackTrace();
     }
   }
 
   public void draw(Graphics g) {
-    int n = count;
-    for (int i = 5; i > 0; i--) {
-      int j = n % 10;
-      n /= 10;
-      g.drawImage(sc[j], 20+500 + 20 * i, 10, null);
-      g.drawImage(sc[j], 250 + 20 * i, 10, null);
+    g.setFont(font);
+    Color color = new Color(255, 242, 211);
 
-    }
+    g.setColor(color);
+
+    g.drawString(Integer.toString(count), 380, 95);
+
   }
 
   public void setCount() {
