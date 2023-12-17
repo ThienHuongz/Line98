@@ -22,23 +22,24 @@ public class Ball {
       ballSmall = ImageIO.read(new File("../assets/small" + i + ".png"));
       ball2 = new ImageIcon("../assets/d" + i + ".gif").getImage();
     } catch (Exception e) {
-      // TODO: handle exception
       e.printStackTrace();
     }
   }
 
   public void draw(Graphics g) {
-    // g.drawImage(ball2, 15 , 70, null);
-    // g.drawImage(ballSmall, 60 , 115, null);
+    // g.drawImage(ball2, 280, 150, null);
+    // g.drawImage(ball2, 280 + 50, 150 + 55, null);
+
+    // g.drawImage(ballSmall, 280 + 60, 150 + 70, null);
 
     if (ballClicked == true) {
-      g.drawImage(ball2, 45 * x, 50 + 45 * y, null);
+      g.drawImage(ball2, 280 + 54 * x, 150 + 54 * y, null);
     } else {
       if (type == 1) {
         // System.out.println(x+" "+y);
-        g.drawImage(ballBig, 45 * x, 50 + 45 * y, null);
+        g.drawImage(ballBig, 280 + 54 * x, 150 + 54 * y, null);
       } else {
-        g.drawImage(ballSmall, 15 + 45 * x, 70 + 45 * y, null);
+        g.drawImage(ballSmall, 285 + 54 * x, 155 + 55 * y, null);
       }
     }
 

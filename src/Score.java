@@ -17,7 +17,6 @@ public class Score {
         sc[i] = img.getSubimage(0 + 18 * i, 0, 18, 35);
       }
     } catch (Exception e) {
-      // TODO: handle exception
       e.printStackTrace();
     }
   }
@@ -27,7 +26,7 @@ public class Score {
     for (int i = 5; i > 0; i--) {
       int j = n % 10;
       n /= 10;
-      g.drawImage(sc[j], 20 + 20 * i, 10, null);
+      g.drawImage(sc[j], 20+500 + 20 * i, 10, null);
       g.drawImage(sc[j], 250 + 20 * i, 10, null);
 
     }

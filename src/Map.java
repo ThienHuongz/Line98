@@ -267,11 +267,11 @@ public class Map {
     // click => checkPath => if can go => showPath => smallToBigBall => addSmallBall
     // => checkBall count Score
     public void mouse_click(int mx, int my) {
-        if (my > 50) {
-            int yy = (my - 50) / 45;
-            int xx = mx / 45;
+        if (my > 150) {
+            int yy = (my - 150) / 54;
+            int xx = (mx - 280) / 54;
             SoundEffect.play(2);
-            // System.out.println(yy+" "+xx);   
+            // System.out.println(yy+" "+xx);
             if (listOfBall[xx][yy] != null && listOfBall[xx][yy].getType() == 1) {
                 if (p.x != -1) {
                     listOfBall[p.x][p.y].setBallClicked();
