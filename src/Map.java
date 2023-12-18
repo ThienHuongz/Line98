@@ -6,6 +6,7 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
 
+
 import javax.imageio.ImageIO;
 
 public class Map {
@@ -16,6 +17,7 @@ public class Map {
     private int ballInitNumber = 7;
     private int EmptyLine = 81;
     private Score sc = new Score();
+    private Timer timer = new Timer(90);
 
     private static Point p = new Point(-1, -1);
     public ArrayList<Point> pathBall = new ArrayList<>();
@@ -54,12 +56,15 @@ public class Map {
             }
         }
         sc.draw(g);
+        timer.draw(g);
     }
 
     public void init() {
         int i, j, remain, stop;
         // srand(time(NULL));
         SoundEffect.playBGM(0);
+
+        //timer.start();
 
         for (int k = 0; k < ballInitNumber; k++) {
             remain = randomX(EmptyLine--) + 1;
