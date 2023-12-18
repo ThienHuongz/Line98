@@ -11,7 +11,7 @@ public class game{
         // if close window -> stop the program
         panel.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        panel.setSize(1040, 700);
+        panel.setSize(1040, 735);
 
         // show the window on screen
         panel.setVisible(true);

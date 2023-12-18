@@ -56,10 +56,10 @@ public class Timer {
         String zero = "0";
         if(second >= 10) zero = "";
 
-        String res = minute + ":" + zero + Integer.toString(second);
+        String res = "Time "+ minute + ":" + zero + Integer.toString(second);
 
         g.setColor(Color.black);
         g.setFont(new Font("Source Code Pro", Font.PLAIN, 30));
-        g.drawString(res,700,675);   
+        g.drawString(res,250,675);   
     }
 }
