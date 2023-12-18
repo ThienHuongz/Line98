@@ -203,6 +203,8 @@ public class Map {
             }
         }
         listOfBall = deepCopyBallArray(listOfBallTest);
+        listOfBall[p.x][p.y].setBallClicked();
+
         return false;
     }
 
