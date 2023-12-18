@@ -41,6 +41,9 @@ public class Timer {
             timeStopped = (int)((System.currentTimeMillis() - stopTime) / 1E3);
         }
         int res = (int)(endTime - (System.currentTimeMillis()-startTime) / 1E3 + timeStopped);
+        if(res == 0){
+            stop();
+        }
         return res;
     }
 
