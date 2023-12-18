@@ -1,11 +1,12 @@
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Random;
-
 
 import javax.imageio.ImageIO;
 
@@ -57,6 +58,7 @@ public class Map {
         }
         sc.draw(g);
         timer.draw(g);
+
     }
 
     public void init() {
@@ -64,7 +66,7 @@ public class Map {
         // srand(time(NULL));
         SoundEffect.playBGM(0);
 
-        //timer.start();
+        timer.start();
 
         for (int k = 0; k < ballInitNumber; k++) {
             remain = randomX(EmptyLine--) + 1;
@@ -124,7 +126,32 @@ public class Map {
         }
     }
 
+    public static Ball[][] deepCopyBallArray(Ball[][] original) {
+        if (original == null) {
+            return null;
+        }
+
+        int rows = original.length;
+        int cols = original[0].length;
+
+        Ball[][] copy = new Ball[rows][cols];
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (original[i][j] != null) {
+                    copy[i][j] = new Ball(original[i][j]); // Assuming Ball has a copy constructor
+                }
+            }
+        }
+
+        return copy;
+    }
+
     public boolean checkPath(int startX, int startY, int finishX, int finishY) {
+
+        Ball[][] listOfBallTest = deepCopyBallArray(listOfBall);
+
+        smallToBigBall();
 
         int[] u = { -1, 1, 0, 0 };
         int[] v = { 0, 0, -1, 1 };
@@ -168,11 +195,14 @@ public class Map {
 
                     if (visited[finishX][finishY]) {
                         findPath(new Point(finishX, finishY), parent);
+                        listOfBall = deepCopyBallArray(listOfBallTest);
+                        listOfBall[p.x][p.y].setBallClicked();
                         return true;
                     }
                 }
             }
         }
+        listOfBall = deepCopyBallArray(listOfBallTest);
         return false;
     }
 
@@ -189,16 +219,35 @@ public class Map {
     }
 
     public void showPath() {
-        int i;
-        for (i = 1; i < pathBall.size(); i++) {
-            // System.out.println(pathBall.get(i).x + " " + pathBall.get(i).y);
-            listOfBall[p.x][p.y].setXY(pathBall.get(i).x, pathBall.get(i).y);
-        }
-        i--;
-        listOfBall[p.x][p.y].setBallClicked();
-        listOfBall[pathBall.get(i).x][pathBall.get(i).y] = listOfBall[p.x][p.y];
-        listOfBall[p.x][p.y] = null;
-        p.x = -1;
+        int delayBetweenBalls = 250; // 0.25 seconds
+
+        ActionListener drawAction = new ActionListener() {
+            private int index = 1; // Start from 1 to skip the first point (p.x, p.y)
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (index < pathBall.size()) {
+                    Point currentPoint = pathBall.get(index);
+                    listOfBall[p.x][p.y].setXY(currentPoint.x, currentPoint.y);
+
+                    // Additional logic if needed after setting XY
+
+                    index++;
+                } else {
+                    // All points processed, stop the timer
+                    ((javax.swing.Timer) e.getSource()).stop();
+
+                    index--;
+                    listOfBall[p.x][p.y].setBallClicked();
+                    listOfBall[pathBall.get(index).x][pathBall.get(index).y] = listOfBall[p.x][p.y];
+                    listOfBall[p.x][p.y] = null;
+                    p.x = -1;
+                }
+            }
+        };
+
+        javax.swing.Timer timer = new javax.swing.Timer(delayBetweenBalls, drawAction);
+        timer.start();
     }
 
     public void handleBallConsecutive(int i, int j, int type) {
@@ -290,10 +339,7 @@ public class Map {
                     showPath();
                     smallToBigBall();
                     addSmallBall();
-                    if (checkBallScore()) {
-                        SoundEffect.play(1);
-                        sc.setCount();
-                    }
+
                 }
 
             }
@@ -301,4 +347,10 @@ public class Map {
 
     }
 
+    public void update() {
+        if (checkBallScore()) {
+            SoundEffect.play(1);
+            sc.setCount();
+        }
+    }
 }

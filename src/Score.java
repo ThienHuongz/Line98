@@ -11,7 +11,7 @@ import java.awt.Color;
 
 public class Score {
 
-  Font font;
+  Font font, font2;
   private int count = 0;
 
   public Score() {
@@ -24,7 +24,15 @@ public class Score {
       Files.copy(fontFile.toPath(), tempFontFile, StandardCopyOption.REPLACE_EXISTING);
 
       // Load the font from the temporary file
-      font = Font.createFont(Font.TRUETYPE_FONT, tempFontFile.toFile()).deriveFont(80f);
+      font = Font.createFont(Font.TRUETYPE_FONT, tempFontFile.toFile()).deriveFont(40f);
+
+      fontFile = new File("../assets/Lobster-Regular.ttf");
+
+      // Copy the font file to a temporary file
+      tempFontFile = Files.createTempFile("digital-7", ".ttf");
+      Files.copy(fontFile.toPath(), tempFontFile, StandardCopyOption.REPLACE_EXISTING);
+
+      font2 = Font.createFont(Font.TRUETYPE_FONT, tempFontFile.toFile()).deriveFont(30f);
 
     } catch (IOException | FontFormatException e) {
       e.printStackTrace();
@@ -32,12 +40,15 @@ public class Score {
   }
 
   public void draw(Graphics g) {
-    g.setFont(font);
-    Color color = new Color(255, 242, 211);
+    g.setFont(font2);
+    Color color = new Color(255, 215, 0);
 
     g.setColor(color);
 
-    g.drawString(Integer.toString(count), 380, 95);
+    g.drawString("Score", 250, 675);
+
+    g.setFont(font);
+    g.drawString(Integer.toString(count), 350, 675);
 
   }
 

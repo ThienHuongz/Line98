@@ -13,7 +13,7 @@ public class game{
 
         panel.setSize(1040, 735);
 
-        // show the window on screen
+        // show the window on screen    
         panel.setVisible(true);
 
         // can not resize window
@@ -23,7 +23,7 @@ public class game{
         panel.setLocationRelativeTo(null);
 
         // add logo
-        
+
         panel.setIconImage(new ImageIcon("../assets/icon.png").getImage());
     }
 }
