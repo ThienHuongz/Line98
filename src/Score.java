@@ -49,7 +49,7 @@ public class Score {
 
     g.setFont(font);
     g.drawString(Integer.toString(count), 350, 675);
-    g.drawString("Score: "+Integer.toString(count), 350,  675);
+    g.drawString(Integer.toString(count), 350,  675);
 
   }
 
