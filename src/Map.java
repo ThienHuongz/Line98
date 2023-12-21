@@ -281,6 +281,7 @@ public class Map {
                             // System.out.println(d + " " + i + " " + j + " " + k);
                             if (d == 5) {
                                 handleBallConsecutive(i, j, 1);
+                                EmptyLine += 5;
                                 return true;
                             }
                         } else {
@@ -341,7 +342,7 @@ public class Map {
                     showPath();
                     smallToBigBall();
                     addSmallBall();
-
+                    System.out.println("asd");
                 }
 
             }
