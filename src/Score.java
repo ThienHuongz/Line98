@@ -37,7 +37,7 @@ public class Score {
 
     g.setColor(color);
 
-    g.drawString(Integer.toString(count), 380, 95);
+    g.drawString("Score: "+Integer.toString(count), 380, 95);
 
   }
 
