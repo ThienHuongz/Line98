@@ -8,15 +8,19 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean IsRun = true;
     private Thread thread;
     private static int FPS = 60;
-    private Map map;
+    private GamePlay map;
     private MouseHandle ms = new MouseHandle(this);
+
+    private GameStateManager gameStates;
 
     public GamePanel() {
         super();
-        map = new Map();
+        map = new GamePlay();
         this.addMouseListener(ms);
         this.setFocusable(true);
         thread = new Thread(this);
+
+        gameStates = new GameStateManager(this);
 
         // call run method
         thread.start();
@@ -65,15 +69,23 @@ public class GamePanel extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         // to ensure that any necessary pre-painting operations are performed
         super.paintComponent(g);
-        map.draw(g);
+        gameStates.draw(g);
+        // map.draw(g);
 
     }
 
     public void mouse_click(int mx, int my) {
-        map.mouse_click(mx, my);
+        // map.mouse_click(mx, my);
+        gameStates.mouse_click(mx, my);
     }
 
     public void update() {
-        map.update();
+        // map.update();
+
+        gameStates.update();
+    }
+
+    public GameStateManager getGameStateManager() {
+        return gameStates;
     }
 }

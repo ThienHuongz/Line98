@@ -10,7 +10,7 @@ import java.util.Random;
 
 import javax.imageio.ImageIO;
 
-public class Map {
+public class GamePlay implements GameStateBase {
     private BufferedImage bg;
 
     private Ball[][] listOfBall = new Ball[10][10];
@@ -32,14 +32,9 @@ public class Map {
         }
     }
 
-    public Map() {
-        try {
-            bg = ImageIO.read(new File("../assets/background.png"));
+    public GamePlay() {
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        init();
+        // init();
     }
 
     public int randomX(int n) {
@@ -62,6 +57,13 @@ public class Map {
     }
 
     public void init() {
+        try {
+            bg = ImageIO.read(new File("../assets/background.png"));
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         int i, j, remain, stop;
         // srand(time(NULL));
         SoundEffect.playBGM(0);
@@ -347,6 +349,10 @@ public class Map {
 
             }
         }
+
+    }
+
+    public void mouse_move(int mx, int my) {
 
     }
 
