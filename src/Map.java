@@ -149,9 +149,9 @@ public class Map {
 
     public boolean checkPath(int startX, int startY, int finishX, int finishY) {
 
-        Ball[][] listOfBallTest = deepCopyBallArray(listOfBall);
+        // Ball[][] listOfBallTest = deepCopyBallArray(listOfBall);
 
-        smallToBigBall();
+        // smallToBigBall();
 
         int[] u = { -1, 1, 0, 0 };
         int[] v = { 0, 0, -1, 1 };
@@ -195,15 +195,15 @@ public class Map {
 
                     if (visited[finishX][finishY]) {
                         findPath(new Point(finishX, finishY), parent);
-                        listOfBall = deepCopyBallArray(listOfBallTest);
-                        listOfBall[p.x][p.y].setBallClicked();
+                        // listOfBall = deepCopyBallArray(listOfBallTest);
+                        // listOfBall[p.x][p.y].setBallClicked();
                         return true;
                     }
                 }
             }
         }
-        listOfBall = deepCopyBallArray(listOfBallTest);
-        listOfBall[p.x][p.y].setBallClicked();
+        // listOfBall = deepCopyBallArray(listOfBallTest);
+        // listOfBall[p.x][p.y].setBallClicked();
 
         return false;
     }
@@ -232,8 +232,6 @@ public class Map {
                     Point currentPoint = pathBall.get(index);
                     listOfBall[p.x][p.y].setXY(currentPoint.x, currentPoint.y);
 
-                    // Additional logic if needed after setting XY
-
                     index++;
                 } else {
                     // All points processed, stop the timer
@@ -244,6 +242,9 @@ public class Map {
                     listOfBall[pathBall.get(index).x][pathBall.get(index).y] = listOfBall[p.x][p.y];
                     listOfBall[p.x][p.y] = null;
                     p.x = -1;
+
+                    smallToBigBall();
+                    addSmallBall();
                 }
             }
         };
@@ -340,9 +341,8 @@ public class Map {
                     && (listOfBall[xx][yy] == null || listOfBall[xx][yy].getType() == 2)) {
                 if (checkPath(p.x, p.y, xx, yy)) {
                     showPath();
-                    smallToBigBall();
-                    addSmallBall();
-                    System.out.println("asd");
+
+                    // System.out.println("asd");
                 }
 
             }
