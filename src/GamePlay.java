@@ -75,7 +75,6 @@ public class GamePlay implements GameStateBase {
         timer = new Timer(10);
         p = new Point(-1, -1);
         pathBall = new ArrayList<>();
-        timer.start();
 
         try {
             bg = ImageIO.read(new File("../assets/background.png"));
@@ -86,7 +85,6 @@ public class GamePlay implements GameStateBase {
 
         int i, j, remain, stop;
         // srand(time(NULL));
-        // SoundEffect.playBGM(0);
         for (int k = 0; k < ballInitNumber; k++) {
             remain = randomX(EmptyLine--) + 1;
             stop = 0;
@@ -385,6 +383,8 @@ public class GamePlay implements GameStateBase {
 
         if (timer.isGameOver()) {
             gamepanel.getGameStateManager().setScore(sc.getCount());
+            SoundEffect.StopBGM();
+            SoundEffect.playBGM(5);
             gamepanel.getGameStateManager().setState(2);
 
         }
@@ -398,7 +398,9 @@ public class GamePlay implements GameStateBase {
     public void resumeScreen() {
         timer.resume();
     }
-
+    public void startTimer(){
+        timer.start();
+    }
     public void restart() {
         init();
     }

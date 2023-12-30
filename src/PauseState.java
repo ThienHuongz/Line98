@@ -44,16 +44,22 @@ public class PauseState implements GameStateBase {
         // CONTINUE
         if (new Rectangle(300, 270, 400, 100).contains(mx, my)) {
             // System.exit(0);
-            SoundEffect.play(1);
+            SoundEffect.play(6);
+            SoundEffect.StopBGM();
+            SoundEffect.playBGM(0);
             gamepanel.getGameStateManager().setState(1);
             GamePlay.getInstance(gamepanel).resumeScreen();
         }
 
         // RESTART
         if (new Rectangle(300, 380, 400, 100).contains(mx, my)) {
-            SoundEffect.play(1);
+            SoundEffect.play(6);
+            SoundEffect.StopBGM();
+            SoundEffect.playBGM(0);
             GamePlay.getInstance(gamepanel).restart();
             gamepanel.getGameStateManager().setState(1);
+            GamePlay.getInstance(gamepanel).startTimer();
+
         }
 
         // EXIT

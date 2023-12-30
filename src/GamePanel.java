@@ -79,6 +79,8 @@ public class GamePanel extends JPanel implements Runnable {
         if (wh.IsWindowDeactivated) {
             if (gameStates.getCurrentState() == 1) {
                 GamePlay.getInstance(this).pauseScreen();
+                SoundEffect.StopBGM();
+                SoundEffect.playBGM(4);
                 gameStates.setState(3);
             }
             wh.IsWindowDeactivated = false;

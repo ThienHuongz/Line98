@@ -11,7 +11,7 @@ public class StartState implements GameStateBase {
     GamePanel gamepanel;
 
     public StartState(GamePanel gamepanel) {
-        SoundEffect.playBGM(0);
+        SoundEffect.playBGM(3);
         this.gamepanel = gamepanel;
         try {
             mn[0] = ImageIO.read(new File("../assets/start.png"));
@@ -38,8 +38,11 @@ public class StartState implements GameStateBase {
         // System.out.println(mx+" "+my);
         if (new Rectangle(100, 169, 350, 350).contains(mx, my)) {
             // System.exit(0);
-            // SoundEffect.play(2);
+            SoundEffect.play(2);
+            SoundEffect.StopBGM();
+            SoundEffect.playBGM(0);
             gamepanel.getGameStateManager().setState(1);
+            GamePlay.getInstance(gamepanel).startTimer();
         }
     }
 
