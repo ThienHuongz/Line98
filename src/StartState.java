@@ -13,16 +13,16 @@ public class StartState implements GameStateBase {
     public StartState(GamePanel gamepanel) {
         SoundEffect.playBGM(0);
         this.gamepanel = gamepanel;
-        init();
-    }
-
-    public void init() {
         try {
             mn[0] = ImageIO.read(new File("../assets/start.png"));
 
         } catch (IOException e) {
             System.err.println("Error loading start image from file: " + e.getMessage());
         }
+    }
+
+    public void init() {
+
     }
 
     public void draw(Graphics g) {

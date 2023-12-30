@@ -11,9 +11,11 @@ public class GamePanel extends JPanel implements Runnable {
     private MouseHandle ms = new MouseHandle(this);
 
     private GameStateManager gameStates;
+    private WindowHandle wh;
 
-    public GamePanel() {
+    public GamePanel(WindowHandle wh) {
         super();
+        this.wh = wh;
         this.addMouseListener(ms);
         this.setFocusable(true);
         thread = new Thread(this);
@@ -29,12 +31,17 @@ public class GamePanel extends JPanel implements Runnable {
         double drawInterval = 1000000000 / FPS; // 1 giây/ 60
         double nextDrawTime = System.nanoTime() + drawInterval;
         long timer = 0;
-        int count = 0;
 
-        while (IsRun) {
+        while (true) {
+
+            IsPause();
+            IsWindowDeactivated();
+
             // call paintcomponent
             repaint();
-            update();
+            if (IsRun)
+                update();
+
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
                 timer += remainingTime;
@@ -50,17 +57,33 @@ public class GamePanel extends JPanel implements Runnable {
 
                 nextDrawTime += drawInterval;
 
-                count++;
                 if (timer >= 1000000000) {
                     // System.out.println("FPS: "+count);
                     timer = 0;
-                    count = 0;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 
+    }
+
+    public void IsPause() {
+        // if (key.isKeyEsc() == true && gameState.getCurrentState() == 2) {
+        // IsRun = !IsRun;
+        // key.setKeyEsc(false);
+        // }
+    }
+
+    public void IsWindowDeactivated() {
+        if (wh.IsWindowDeactivated) {
+            if (gameStates.getCurrentState() == 1) {
+                GamePlay.getInstance(this).pauseScreen();
+                gameStates.setState(3);
+            }
+            wh.IsWindowDeactivated = false;
+
+        }
     }
 
     @Override
@@ -85,5 +108,9 @@ public class GamePanel extends JPanel implements Runnable {
 
     public GameStateManager getGameStateManager() {
         return gameStates;
+    }
+
+    public WindowHandle getWindowHandle() {
+        return wh;
     }
 }

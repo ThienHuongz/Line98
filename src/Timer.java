@@ -65,7 +65,7 @@ public class Timer {
             stopTime = System.currentTimeMillis();
             running = false;
         }
-        isGameOver = true;
+        
     }
 
     public int getElapsedTime() {
@@ -76,6 +76,7 @@ public class Timer {
         int res = (int) (endTime - (System.currentTimeMillis() - startTime) / 1E3 + timeStopped);
         if (res == 0) {
             stop();
+            isGameOver = true;
         }
         return res;
     }

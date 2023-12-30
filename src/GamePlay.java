@@ -13,18 +13,19 @@ import javax.imageio.ImageIO;
 public class GamePlay implements GameStateBase {
     private BufferedImage bg;
 
-    private Ball[][] listOfBall = new Ball[10][10];
-    private Random random = new Random();
+    private Ball[][] listOfBall;
+    private Random random;
     private int ballInitNumber = 7;
     private int EmptyLine = 81;
-    private Score sc = new Score();
-    private Timer timer = new Timer(90);
+    private Score sc;
+    private Timer timer;
 
-    private static Point p = new Point(-1, -1);
-    public ArrayList<Point> pathBall = new ArrayList<>();
+    private static Point p;
+    public ArrayList<Point> pathBall;
 
     private GamePanel gamepanel;
     private boolean showPathIsDone = true;
+    private static GamePlay INSTANCE;
 
     public static class Point {
         public int x, y;
@@ -37,7 +38,15 @@ public class GamePlay implements GameStateBase {
 
     public GamePlay(GamePanel gamepanel) {
         this.gamepanel = gamepanel;
-        // init();
+        init();
+
+    }
+
+    public static GamePlay getInstance(GamePanel gamePanel) {
+        if (INSTANCE == null) {
+            INSTANCE = new GamePlay(gamePanel);
+        }
+        return INSTANCE;
     }
 
     public int randomX(int n) {
@@ -60,6 +69,14 @@ public class GamePlay implements GameStateBase {
     }
 
     public void init() {
+        listOfBall = new Ball[10][10];
+        random = new Random();
+        sc = new Score();
+        timer = new Timer(10);
+        p = new Point(-1, -1);
+        pathBall = new ArrayList<>();
+        timer.start();
+
         try {
             bg = ImageIO.read(new File("../assets/background.png"));
 
@@ -70,9 +87,6 @@ public class GamePlay implements GameStateBase {
         int i, j, remain, stop;
         // srand(time(NULL));
         // SoundEffect.playBGM(0);
-
-        timer.start();
-
         for (int k = 0; k < ballInitNumber; k++) {
             remain = randomX(EmptyLine--) + 1;
             stop = 0;
@@ -374,6 +388,18 @@ public class GamePlay implements GameStateBase {
             gamepanel.getGameStateManager().setState(2);
 
         }
+
     }
 
+    public void pauseScreen() {
+        timer.stop();
+    }
+
+    public void resumeScreen() {
+        timer.resume();
+    }
+
+    public void restart() {
+        init();
+    }
 }
