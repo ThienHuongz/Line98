@@ -52,7 +52,7 @@ public class GameOverState implements GameStateBase {
         g.drawImage(mn[0], 0, 0, null);
 
         g.setFont(font);
-        g.drawString(Integer.toString(score), 540, 480);
+        g.drawString(Integer.toString(score), 540, 450);
 
     }
 
@@ -61,7 +61,17 @@ public class GameOverState implements GameStateBase {
     }
 
     public void mouse_click(int mx, int my) {
+        // System.out.println(mx + " " + my);
+        // RESTART
+        if (new Rectangle(510, 560, 160, 100).contains(mx, my)) {
+            SoundEffect.play(6);
+            SoundEffect.StopBGM();
+            SoundEffect.playBGM(0);
+            GamePlay.getInstance(gamepanel).restart();
+            gamepanel.getGameStateManager().setState(1);
+            GamePlay.getInstance(gamepanel).startTimer();
 
+        }
     }
 
     public void update() {
