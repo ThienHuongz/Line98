@@ -5,7 +5,7 @@ import javax.swing.WindowConstants;
 
 public class game{
     public static void main(String[] args){
-        JFrame panel = new JFrame("Line 98");
+        JFrame panel = new JFrame("The Animal Lines");
         
         panel.setContentPane(new GamePanel());
         // if close window -> stop the program
