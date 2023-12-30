@@ -73,7 +73,7 @@ public class GamePlay implements GameStateBase {
         listOfBall = new Ball[10][10];
         random = new Random();
         sc = new Score();
-        timer = new Timer(5);
+        timer = new Timer(100);
         p = new Point(-1, -1);
         pathBall = new ArrayList<>();
 

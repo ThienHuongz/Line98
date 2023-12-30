@@ -39,7 +39,7 @@ public class PauseState implements GameStateBase {
     }
 
     public void mouse_click(int mx, int my) {
-        System.out.println(mx + " " + my);
+        // System.out.println(mx + " " + my);
 
         // CONTINUE
         if (new Rectangle(300, 270, 400, 100).contains(mx, my)) {

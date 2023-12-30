@@ -83,6 +83,9 @@ public class GameOverState implements GameStateBase {
 
     public void setScore(int score) {
         this.score = score;
+        if (highestScore < score) {
+            highestScore = score;
+        }
     }
 
     public void SaveUserData() {
