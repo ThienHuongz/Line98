@@ -1,5 +1,6 @@
 
 import java.awt.Graphics;
+import java.io.PrintWriter;
 
 import javax.swing.*;
 
@@ -104,9 +105,11 @@ public class GamePanel extends JPanel implements Runnable {
 
     public void update() {
         // map.update();
-
         gameStates.update();
+        
     }
+
+
 
     public GameStateManager getGameStateManager() {
         return gameStates;

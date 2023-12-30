@@ -5,6 +5,7 @@ import javax.imageio.ImageIO;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,7 +18,7 @@ public class GameOverState implements GameStateBase {
     private BufferedImage mn[] = new BufferedImage[20];
     private Font font;
     GamePanel gamepanel;
-    private int score;
+    private int score, highestScore;
 
     public GameOverState(GamePanel gamepanel) {
         this.gamepanel = gamepanel;
@@ -54,6 +55,8 @@ public class GameOverState implements GameStateBase {
         g.setFont(font);
         g.drawString(Integer.toString(score), 540, 450);
 
+        g.drawString(Integer.toString(highestScore), 540, 550);
+
     }
 
     public void mouse_move(int mx, int my) {
@@ -71,6 +74,7 @@ public class GameOverState implements GameStateBase {
             gamepanel.getGameStateManager().setState(1);
             GamePlay.getInstance(gamepanel).startTimer();
 
+            SaveUserData();
         }
     }
 
@@ -84,7 +88,7 @@ public class GameOverState implements GameStateBase {
 
     public void SaveUserData() {
         try {
-            PrintWriter writer = new PrintWriter("assets/UserSavedGame/User1.map", "UTF-8");
+            PrintWriter writer = new PrintWriter("../assets/UserSavedGame/User1.map", "UTF-8");
             writer.println(score);
 
             writer.close();
@@ -99,12 +103,12 @@ public class GameOverState implements GameStateBase {
     }
 
     public void loadUserSavedGame() {
-        File myObj = new File("assets/UserSavedGame/User1.map");
+        File myObj = new File("../assets/UserSavedGame/User1.map");
         if (myObj.isFile()) {
             try {
-                InputStream in = getClass().getResourceAsStream("assets/UserSavedGame/User1.map");
+                FileInputStream in = new FileInputStream(myObj);
                 BufferedReader br = new BufferedReader(new InputStreamReader(in));
-                score = Integer.parseInt(br.readLine());
+                highestScore = Integer.parseInt(br.readLine());
                 // String delims = "\\s++";
 
                 // String line = br.readLine();
