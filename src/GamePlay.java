@@ -18,7 +18,7 @@ public class GamePlay implements GameStateBase {
     private int ballInitNumber = 7;
     private int EmptyLine = 81;
     private Score sc = new Score();
-    private Timer timer = new Timer(5);
+    private Timer timer = new Timer(90);
 
     private static Point p = new Point(-1, -1);
     public ArrayList<Point> pathBall = new ArrayList<>();
@@ -68,7 +68,7 @@ public class GamePlay implements GameStateBase {
 
         int i, j, remain, stop;
         // srand(time(NULL));
-        SoundEffect.playBGM(0);
+        // SoundEffect.playBGM(0);
 
         timer.start();
 

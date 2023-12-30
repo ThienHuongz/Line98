@@ -20,7 +20,6 @@ public class StartState implements GameStateBase {
         try {
             mn[0] = ImageIO.read(new File("../assets/start.png"));
 
-
         } catch (IOException e) {
             System.err.println("Error loading start image from file: " + e.getMessage());
         }
@@ -29,18 +28,15 @@ public class StartState implements GameStateBase {
     public void draw(Graphics g) {
         g.drawImage(mn[0], 0, 0, null);
 
-
-
     }
 
     public void mouse_move(int mx, int my) {
 
-
     }
 
     public void mouse_click(int mx, int my) {
-
-        if (new Rectangle(370, 490, 300, 300).contains(mx, my)) {
+        // System.out.println(mx+" "+my);
+        if (new Rectangle(100, 169, 350, 350).contains(mx, my)) {
             // System.exit(0);
             // SoundEffect.play(2);
             gamepanel.getGameStateManager().setState(1);
