@@ -4,7 +4,7 @@ import javax.swing.WindowConstants;
 
 public class game {
     public static void main(String[] args) {
-        JFrame panel = new JFrame("Line 98");
+        JFrame panel = new JFrame("The Animal Lines");
 
         WindowHandle wh = WindowHandle.getInstance();
         panel.addWindowListener(wh);
