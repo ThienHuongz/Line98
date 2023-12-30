@@ -5,7 +5,7 @@ public class GameStateManager {
     
     private ArrayList<GameStateBase> gameStates;
     private int currentState;
-
+    private int score;
     public static final int STARTSTATE = 0;
     // public static final int LEVELSTATE = 1;
     public static final int MAP = 1;
@@ -16,8 +16,9 @@ public class GameStateManager {
         gameStates = new ArrayList<GameStateBase>();
         currentState = STARTSTATE;
         gameStates.add(new StartState(pn));
-        gameStates.add(new GamePlay());
-        
+        gameStates.add(new GamePlay(pn));
+        gameStates.add(new GameOverState(pn));
+
     }
 
     public void setState(int state){
@@ -42,5 +43,9 @@ public class GameStateManager {
     }
     public void mouse_move(int mx,int my){
         gameStates.get(currentState).mouse_move(mx, my);
+    }
+
+    public void setScore(int score){
+        ((GameOverState) gameStates.get(GAMEOVERSTATE)).setScore(score);
     }
 }

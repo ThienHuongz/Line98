@@ -15,6 +15,8 @@ public class Timer {
     private boolean running;
     private Font font, font2;
 
+    private boolean isGameOver = false;
+
     public Timer(int time) {
         running = false;
         endTime = time;
@@ -58,10 +60,12 @@ public class Timer {
     }
 
     public void stop() {
+
         if (running) {
             stopTime = System.currentTimeMillis();
             running = false;
         }
+        isGameOver = true;
     }
 
     public int getElapsedTime() {
@@ -101,4 +105,9 @@ public class Timer {
         g.drawString(res, 550, 100);
 
     }
+
+    public boolean isGameOver() {
+        return isGameOver;
+    }
+
 }

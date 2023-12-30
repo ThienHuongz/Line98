@@ -55,5 +55,7 @@ public class Score {
   public void setCount() {
     this.count = count + 1;
   }
-
+  public int getCount(){
+    return count;
+  }
 }

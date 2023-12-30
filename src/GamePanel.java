@@ -8,14 +8,12 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean IsRun = true;
     private Thread thread;
     private static int FPS = 60;
-    private GamePlay map;
     private MouseHandle ms = new MouseHandle(this);
 
     private GameStateManager gameStates;
 
     public GamePanel() {
         super();
-        map = new GamePlay();
         this.addMouseListener(ms);
         this.setFocusable(true);
         thread = new Thread(this);

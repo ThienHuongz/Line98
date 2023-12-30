@@ -18,10 +18,12 @@ public class GamePlay implements GameStateBase {
     private int ballInitNumber = 7;
     private int EmptyLine = 81;
     private Score sc = new Score();
-    private Timer timer = new Timer(90);
+    private Timer timer = new Timer(5);
 
     private static Point p = new Point(-1, -1);
     public ArrayList<Point> pathBall = new ArrayList<>();
+
+    private GamePanel gamepanel;
 
     public static class Point {
         public int x, y;
@@ -32,8 +34,8 @@ public class GamePlay implements GameStateBase {
         }
     }
 
-    public GamePlay() {
-
+    public GamePlay(GamePanel gamepanel) {
+        this.gamepanel = gamepanel;
         // init();
     }
 
@@ -361,5 +363,13 @@ public class GamePlay implements GameStateBase {
             SoundEffect.play(1);
             sc.setCount();
         }
+
+        if (timer.isGameOver()) {
+            gamepanel.getGameStateManager().setScore(sc.getCount());
+            gamepanel.getGameStateManager().setState(2);
+
+        }
     }
+
+
 }
