@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.nio.file.Files;
@@ -48,7 +47,7 @@ public class GameOverState implements GameStateBase {
 
     public void draw(Graphics g) {
 
-        g.setColor(new Color(0, 0, 0, 150));
+        g.setColor(new Color(255, 215, 0));
 
         g.drawImage(mn[0], 0, 0, null);
 

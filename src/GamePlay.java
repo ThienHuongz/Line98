@@ -1,4 +1,5 @@
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -72,7 +73,7 @@ public class GamePlay implements GameStateBase {
         listOfBall = new Ball[10][10];
         random = new Random();
         sc = new Score();
-        timer = new Timer(10);
+        timer = new Timer(5);
         p = new Point(-1, -1);
         pathBall = new ArrayList<>();
 
@@ -344,6 +345,18 @@ public class GamePlay implements GameStateBase {
     // click => checkPath => if can go => showPath => smallToBigBall => addSmallBall
     // => checkBall count Score
     public void mouse_click(int mx, int my) {
+        if (new Rectangle(570, 650, 30, 30).contains(mx, my)) {
+            pauseScreen();
+            SoundEffect.StopBGM();
+            SoundEffect.playBGM(4);
+            gamepanel.getGameStateManager().setState(3);
+
+        } else if (new Rectangle(640, 650, 50, 30).contains(mx, my)) {
+            SoundEffect.StopBGM();
+        } else if (new Rectangle(720, 650, 50, 30).contains(mx, my)) {
+            SoundEffect.playBGM(0);
+        }
+
         if (showPathIsDone) {
             if (my > 150) {
                 int yy = (my - 150) / 54;
@@ -398,9 +411,11 @@ public class GamePlay implements GameStateBase {
     public void resumeScreen() {
         timer.resume();
     }
-    public void startTimer(){
+
+    public void startTimer() {
         timer.start();
     }
+
     public void restart() {
         init();
     }

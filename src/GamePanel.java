@@ -1,6 +1,5 @@
 
 import java.awt.Graphics;
-import java.io.PrintWriter;
 
 import javax.swing.*;
 
