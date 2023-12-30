@@ -24,6 +24,7 @@ public class GamePlay implements GameStateBase {
     public ArrayList<Point> pathBall = new ArrayList<>();
 
     private GamePanel gamepanel;
+    private boolean showPathIsDone = true;
 
     public static class Point {
         public int x, y;
@@ -226,6 +227,7 @@ public class GamePlay implements GameStateBase {
 
     public void showPath() {
         int delayBetweenBalls = 250; // 0.25 seconds
+        showPathIsDone = false;
 
         ActionListener drawAction = new ActionListener() {
             private int index = 1; // Start from 1 to skip the first point (p.x, p.y)
@@ -249,6 +251,7 @@ public class GamePlay implements GameStateBase {
 
                     smallToBigBall();
                     addSmallBall();
+                    showPathIsDone = true;
                 }
             }
         };
@@ -329,26 +332,28 @@ public class GamePlay implements GameStateBase {
     // click => checkPath => if can go => showPath => smallToBigBall => addSmallBall
     // => checkBall count Score
     public void mouse_click(int mx, int my) {
-        if (my > 150) {
-            int yy = (my - 150) / 54;
-            int xx = (mx - 280) / 54;
-            SoundEffect.play(2);
-            // System.out.println(yy+" "+xx);
-            if (listOfBall[xx][yy] != null && listOfBall[xx][yy].getType() == 1) {
-                if (p.x != -1) {
-                    listOfBall[p.x][p.y].setBallClicked();
-                }
-                listOfBall[xx][yy].setBallClicked();
-                p.x = xx;
-                p.y = yy;
-            } else if (p.x != -1 && listOfBall[p.x][p.y].getBallClicked()
-                    && (listOfBall[xx][yy] == null || listOfBall[xx][yy].getType() == 2)) {
-                if (checkPath(p.x, p.y, xx, yy)) {
-                    showPath();
+        if (showPathIsDone) {
+            if (my > 150) {
+                int yy = (my - 150) / 54;
+                int xx = (mx - 280) / 54;
+                SoundEffect.play(2);
+                // System.out.println(yy+" "+xx);
+                if (listOfBall[xx][yy] != null && listOfBall[xx][yy].getType() == 1) {
+                    if (p.x != -1) {
+                        listOfBall[p.x][p.y].setBallClicked();
+                    }
+                    listOfBall[xx][yy].setBallClicked();
+                    p.x = xx;
+                    p.y = yy;
+                } else if (p.x != -1 && listOfBall[p.x][p.y].getBallClicked()
+                        && (listOfBall[xx][yy] == null || listOfBall[xx][yy].getType() == 2)) {
+                    if (checkPath(p.x, p.y, xx, yy)) {
+                        showPath();
 
-                    // System.out.println("asd");
-                }
+                        // System.out.println("asd");
+                    }
 
+                }
             }
         }
 
@@ -370,6 +375,5 @@ public class GamePlay implements GameStateBase {
 
         }
     }
-
 
 }
