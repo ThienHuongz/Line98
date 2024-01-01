@@ -8,15 +8,19 @@ public class GamePanel extends JPanel implements Runnable {
     private boolean IsRun = true;
     private Thread thread;
     private static int FPS = 60;
-    private Map map;
     private MouseHandle ms = new MouseHandle(this);
 
-    public GamePanel() {
+    private GameStateManager gameStates;
+    private WindowHandle wh;
+
+    public GamePanel(WindowHandle wh) {
         super();
-        map = new Map();
+        this.wh = wh;
         this.addMouseListener(ms);
         this.setFocusable(true);
         thread = new Thread(this);
+
+        gameStates = new GameStateManager(this);
 
         // call run method
         thread.start();
@@ -27,12 +31,17 @@ public class GamePanel extends JPanel implements Runnable {
         double drawInterval = 1000000000 / FPS; // 1 giây/ 60
         double nextDrawTime = System.nanoTime() + drawInterval;
         long timer = 0;
-        int count = 0;
 
-        while (IsRun) {
+        while (true) {
+
+            IsPause();
+            IsWindowDeactivated();
+
             // call paintcomponent
             repaint();
-            update();
+            if (IsRun)
+                update();
+
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();
                 timer += remainingTime;
@@ -48,11 +57,9 @@ public class GamePanel extends JPanel implements Runnable {
 
                 nextDrawTime += drawInterval;
 
-                count++;
                 if (timer >= 1000000000) {
                     // System.out.println("FPS: "+count);
                     timer = 0;
-                    count = 0;
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -61,19 +68,53 @@ public class GamePanel extends JPanel implements Runnable {
 
     }
 
+    public void IsPause() {
+        // if (key.isKeyEsc() == true && gameState.getCurrentState() == 2) {
+        // IsRun = !IsRun;
+        // key.setKeyEsc(false);
+        // }
+    }
+
+    public void IsWindowDeactivated() {
+        if (wh.IsWindowDeactivated) {
+            if (gameStates.getCurrentState() == 1) {
+                GamePlay.getInstance(this).pauseScreen();
+                SoundEffect.StopBGM();
+                SoundEffect.playBGM(4);
+                gameStates.setState(3);
+            }
+            wh.IsWindowDeactivated = false;
+
+        }
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         // to ensure that any necessary pre-painting operations are performed
         super.paintComponent(g);
-        map.draw(g);
+        gameStates.draw(g);
+        // map.draw(g);
 
     }
 
     public void mouse_click(int mx, int my) {
-        map.mouse_click(mx, my);
+        // map.mouse_click(mx, my);
+        gameStates.mouse_click(mx, my);
     }
 
     public void update() {
-        map.update();
+        // map.update();
+        gameStates.update();
+        
+    }
+
+
+
+    public GameStateManager getGameStateManager() {
+        return gameStates;
+    }
+
+    public WindowHandle getWindowHandle() {
+        return wh;
     }
 }

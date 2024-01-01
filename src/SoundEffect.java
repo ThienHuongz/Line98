@@ -17,7 +17,11 @@ public class SoundEffect {
             soundFile[0] = new File("../assets/sound/BGM.wav");
             soundFile[1] = new File("../assets/sound/game-start-6104.wav");
             soundFile[2] = new File("../assets/sound/select-sound-121244.wav");
-            soundFile[3] = new File("../assets/sound/videogame-death-sound-43894.wav");
+            soundFile[3] = new File("../assets/sound/BeginSound.wav");
+            soundFile[4] = new File("../assets/sound/PauseSound.wav");
+            soundFile[5] = new File("../assets/sound/GameOverSound.wav");
+            soundFile[6] = new File("../assets/sound/mouse-click-sound.wav");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

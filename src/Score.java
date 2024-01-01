@@ -48,7 +48,6 @@ public class Score {
     g.drawString("Score", 250, 675);
 
     g.setFont(font);
-    g.drawString(Integer.toString(count), 350, 675);
     g.drawString(Integer.toString(count), 350,  675);
 
   }
@@ -56,5 +55,7 @@ public class Score {
   public void setCount() {
     this.count = count + 1;
   }
-
+  public int getCount(){
+    return count;
+  }
 }
