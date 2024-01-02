@@ -27,10 +27,6 @@ public class SoundEffect {
         }
     }
 
-    static {
-        new SoundEffect();
-    }
-
     public static void play(int i) {
         try {
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(soundFile[i]);
