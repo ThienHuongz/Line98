@@ -9,7 +9,7 @@ public class SoundEffect {
     private static Clip clipBGM, clip;
     private static File soundFile[] = new File[10];
     static {
-        new SoundEffect();
+        new SoundEffect();  
     }
 
     public SoundEffect() {

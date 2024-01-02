@@ -73,7 +73,7 @@ public class GamePlay implements GameStateBase {
         listOfBall = new Ball[10][10];
         random = new Random();
         sc = new Score();
-        timer = new Timer(100);
+        timer = new Timer(90);
         p = new Point(-1, -1);
         pathBall = new ArrayList<>();
 
@@ -373,7 +373,7 @@ public class GamePlay implements GameStateBase {
             sc.setCount();
         }
 
-        if (timer.isGameOver() || EmptyLine == 0) {
+        if (timer.isGameOver()) {
             gamepanel.getGameStateManager().setScore(sc.getCount());
             SoundEffect.StopBGM();
             SoundEffect.playBGM(5);
