@@ -26,20 +26,7 @@ public class Ball {
     }
   }
 
-  public Ball(Ball other) {
-    this.color = other.color;
-    this.x = other.x;
-    this.y = other.y;
-    this.type = other.type;
 
-    try {
-      ballBig = ImageIO.read(new File("../assets/big" + color + ".png"));
-      ballSmall = ImageIO.read(new File("../assets/small" + color + ".png"));
-      ball2 = new ImageIcon("../assets/d" + color + ".gif").getImage();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-  }
 
   public int getX() {
     return x;

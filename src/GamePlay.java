@@ -144,27 +144,6 @@ public class GamePlay implements GameStateBase {
         }
     }
 
-    public static Ball[][] deepCopyBallArray(Ball[][] original) {
-        if (original == null) {
-            return null;
-        }
-
-        int rows = original.length;
-        int cols = original[0].length;
-
-        Ball[][] copy = new Ball[rows][cols];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (original[i][j] != null) {
-                    copy[i][j] = new Ball(original[i][j]); // Assuming Ball has a copy constructor
-                }
-            }
-        }
-
-        return copy;
-    }
-
     public boolean checkPath(int startX, int startY, int finishX, int finishY) {
 
         // Ball[][] listOfBallTest = deepCopyBallArray(listOfBall);
@@ -394,7 +373,7 @@ public class GamePlay implements GameStateBase {
             sc.setCount();
         }
 
-        if (timer.isGameOver()) {
+        if (timer.isGameOver() || EmptyLine == 0) {
             gamepanel.getGameStateManager().setScore(sc.getCount());
             SoundEffect.StopBGM();
             SoundEffect.playBGM(5);
